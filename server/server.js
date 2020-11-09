@@ -8,13 +8,14 @@ const express = require('express'),
       representante = require('../Routes/representanteRoute'),
       autoridad = require('../Routes/autoridadRoute'),
       estacionService = require('../Routes/estacionRoute'),
+      evidenciaSasisopa = require('../Routes/evidenciaSASISOPAroute'),
       app = express(),
       cors = require('cors');
       
 
 
       //Realizamos la conexion a la base de datos
-    mongoose.connect("mongodb://localhost:27017/OILMAGNAMENTSYSTEM",
+    mongoose.connect("mongodb://localhost:27017/BDOMS",
         {
             useNewUrlParser: true,
             useCreateIndex: true,
@@ -39,6 +40,7 @@ const express = require('express'),
     app.use('/representante', representante);
     app.use('/autoridad', autoridad);
     app.use('/estacion', estacionService);
+    app.use('/evidenciaSasisopa', evidenciaSasisopa);
 
     //Escucha el puerto
     app.listen(3000, () => console.log('Vivio el back'))
