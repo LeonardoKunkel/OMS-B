@@ -14,7 +14,7 @@ const express = require('express'),
 
 
       //Realizamos la conexion a la base de datos
-    mongoose.connect("mongodb://localhost:27017/OILMAGNAMENTSYSTEM",
+    mongoose.connect("mongodb://localhost:27017/BDOMS",
         {
             useNewUrlParser: true,
             useCreateIndex: true,
