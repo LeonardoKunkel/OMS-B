@@ -18,8 +18,8 @@ const express = require('express'),
                     ok:false,
                     message:'No se pudo registrar los datos',
                     err
-                })
-            };
+                });
+            }
 
             res.status(200).json({
                 representante
@@ -79,10 +79,10 @@ const express = require('express'),
                     message: `No existe la nominacion con el id ${id}`,
                 });
             }
-            newRepresentante.nombre = body.nombre
-            newRepresentante.apellidos = body.apellidos
-            newRepresentante.telefono = body.telefono
-            newRepresentante.correo = body.correo
+            newRepresentante.nombre = body.nombre,
+            newRepresentante.apellidos = body.apellidos,
+            newRepresentante.telefono = body.telefono,
+            newRepresentante.correo = body.correo,
 
             newRepresentante.save((err, representanteActualizado) =>{
                 if (err) {
