@@ -4,11 +4,16 @@ const express = require('express'),
       usuariosRuta = require('../routes/usuariosRuta'),
       loginRuta = require('../routes/loginRuta'),
       authRuta = require('../routes/authRuta');
+var app = require('../Routes/e2RiesgosRoute');
       gerente = require('../Routes/gerenteRoute'),
       representante = require('../Routes/representanteRoute'),
       autoridad = require('../Routes/autoridadRoute'),
       estacionService = require('../Routes/estacionRoute'),
       evidenciaSasisopa = require('../Routes/evidenciaSASISOPAroute'),
+      riesgos = require('../Routes/e2RiesgosRoute'),
+      aspectos = require('../Routes/e2AspectosRoute'),
+      lista = require('../Routes/e7ListaRoute'),
+      equipoCritico = require('../Routes/e11EquipoCritRoute'),
       app = express(),
       cors = require('cors');
       
@@ -30,9 +35,8 @@ const express = require('express'),
 
         //RUTAS
     app.get('/',(req, res) =>{
-        res.send('Bienvenido al OMS')
-        
-    }) 
+        res.send('Bienvenido al OMS');
+    }); 
     app.use('/user', usuariosRuta);
     app.use('/user/login', loginRuta);
     app.use('/user/auth', authRuta);
@@ -41,6 +45,10 @@ const express = require('express'),
     app.use('/autoridad', autoridad);
     app.use('/estacion', estacionService);
     app.use('/evidenciaSasisopa', evidenciaSasisopa);
+    app.use('/riesgos', riesgos);
+    app.use('/aspectos', aspectos);
+    app.use('/lista', lista);
+    app.use('/equipoCrit', equipoCritico);
 
     //Escucha el puerto
-    app.listen(3000, () => console.log('Vivio el back'))
+    app.listen(3000, () => console.log('Vivio el back'));
