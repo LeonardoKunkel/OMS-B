@@ -1,8 +1,9 @@
 const express = require ('express'),
       listaModel = require ('../Models/e7ListaModel'),
+      //   { verificarToken } = require ('../server/middlewares/auth'),
       app = express();
 
-//Post
+// Post
 app.post('/create', (req, res) => {
     var body = req.body;
     var newDatos = {
@@ -52,7 +53,7 @@ app.post('/create', (req, res) => {
     listaModel.create(newDatos, (err, listas) => {
         if (err) {
             res.status(400).json({
-                ok: true,
+                ok: false,
                 message: 'No se registraron los datos',
                 err
             });
@@ -74,7 +75,7 @@ app.get('/', (req, res) => {
             });
         }
         res.status(200).json({
-            aspectos
+            listas
         });
     });
 });

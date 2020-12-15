@@ -14,6 +14,7 @@ var app = require('../Routes/e2RiesgosRoute');
       aspectos = require('../Routes/e2AspectosRoute'),
       lista = require('../Routes/e7ListaRoute'),
       equipoCritico = require('../Routes/e11EquipoCritRoute'),
+      evaluacionRequisitos = require('../Routes/e14EvaluacionRoute'),
       app = express(),
       cors = require('cors');
       
@@ -34,7 +35,7 @@ var app = require('../Routes/e2RiesgosRoute');
     app.use(bodyParser.json());
 
         //RUTAS
-    app.get('/',(req, res) =>{
+    app.get('/',(req, res) => {
         res.send('Bienvenido al OMS');
     }); 
     app.use('/user', usuariosRuta);
@@ -49,6 +50,7 @@ var app = require('../Routes/e2RiesgosRoute');
     app.use('/aspectos', aspectos);
     app.use('/lista', lista);
     app.use('/equipoCrit', equipoCritico);
+    app.use('/evaluacionReq', evaluacionRequisitos);
 
     //Escucha el puerto
-    app.listen(3000, () => console.log('Vivio el back'));
+    app.listen(3000, () => console.log('Estoy vivo'));
