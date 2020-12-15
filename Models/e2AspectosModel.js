@@ -158,6 +158,7 @@ var aspectosSchema = new Schema({
     VT37: Number,
     VT38: Number,
     VT39: Number,
+    
 });
 
 module.exports = mongoose.model('Aspectos', aspectosSchema);
