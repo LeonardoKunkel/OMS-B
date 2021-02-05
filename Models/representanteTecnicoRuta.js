@@ -5,7 +5,8 @@ const representanteSchema = new Schema({
     nombre: String,
     apellidos: String,
     correo: String,
-    telefono: String
+    telefono: String,
+    firma:String
 });
 
 module.exports = mongoose.model('Representante_Tecnico', representanteSchema);
