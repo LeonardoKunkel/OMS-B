@@ -20,6 +20,11 @@ const estacionSchema = new Schema({
 
     },
     calleNumero: {type:String},
+    filename: {type: String},
+    path:{type: String},
+    originalname:{type: String},
+    mimetype:{type: String},
+    size:{type: Number},
     elemeto1: [
         {
             type: Schema.ObjectId,

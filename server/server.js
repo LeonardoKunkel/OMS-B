@@ -3,6 +3,7 @@ const express = require('express'),
       mongoose = require('mongoose'),
       usuariosRuta = require('../routes/usuariosRuta'),
       loginRuta = require('../routes/loginRuta'),
+      morgan = require('morgan'),
       authRuta = require('../routes/authRuta');
 var app = require('../Routes/e2RiesgosRoute');
       gerente = require('../Routes/gerenteRoute'),
@@ -17,7 +18,7 @@ var app = require('../Routes/e2RiesgosRoute');
       evaluacionRequisitos = require('../Routes/e14EvaluacionRoute'),
       app = express(),
       cors = require('cors');
-      
+      app.use(morgan('dev'));
 
 
       //Realizamos la conexion a la base de datos
@@ -51,6 +52,9 @@ var app = require('../Routes/e2RiesgosRoute');
     app.use('/lista', lista);
     app.use('/equipoCrit', equipoCritico);
     app.use('/evaluacionReq', evaluacionRequisitos);
+
+    //Carpetas de imagenes
+    app.use('/logo', express.static('public/uploads/logosEstaciones'))
 
     //Escucha el puerto
     app.listen(3000, () => console.log('Estoy vivo'));

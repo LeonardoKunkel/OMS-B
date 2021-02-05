@@ -9,7 +9,8 @@ const express = require('express'),
           nombre: body.nombre,
           apellidos: body.apellidos,
           telefono: body.telefono,
-          correo: body.correo
+          correo: body.correo,
+          firma: body.firma
         };
 
         autoridadModel.create(newData, (err, autoridad) =>{
