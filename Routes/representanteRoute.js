@@ -1,8 +1,8 @@
 const express = require('express'),
-      representanteModel = require('../Models/representanteTecnicoRuta'),
+      representanteModel = require('../Models/representanteModel'),
       app = express();
 
-      //POST
+    // POST
     app.post('/create', (req,res) =>{
         let body = req.body;
         let newData = {
@@ -27,9 +27,10 @@ const express = require('express'),
             });
         });
     });
-        //GET
+    
+    // GET
     app.get('/', (req, res) =>{
-        representanteModel.find((err, representante) =>{
+        representanteModel.find((err, representante) => {
             if (err) {
                 res.status(400).json({
                     ok: false,
@@ -42,14 +43,15 @@ const express = require('express'),
             });
         });
     });
-        //GET ID
-    app.get('/:id', (req, res) =>{
+    
+    //GET ID
+    app.get('/:id', (req, res) => {
         let id = req.params.id;
         representanteModel.findById(id, (err, newRepresentante) =>{
             if (err) {
                 res.status(404).json({
                     ok:false,
-                    message:`no se encontro los datos con el id ${id}`,
+                    message: `no se encontro los datos con el id ${id}`,
                     err
                 });
             }
@@ -57,10 +59,10 @@ const express = require('express'),
             res.status(200).json({
                 newRepresentante
             });
-
         });
     });
-        //UPDATE
+    
+    //UPDATE
     app.put('/:id', (req, res) =>{
         let id = req.params.id;
         let body = req.body;
@@ -120,6 +122,6 @@ const express = require('express'),
                 representanteDelete
             });
         });
-    })
+    });
 
     module.exports = app;
