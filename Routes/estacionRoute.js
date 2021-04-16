@@ -1,65 +1,73 @@
 const express = require('express'),
-      estacionModel = require('../Models/EstacionModel'),
-      representanteModel= require('../Models/representanteTecnicoRuta'),
+      estacionModel = require('../Models/estacionModel'),
+      representanteModel= require('../Models/representanteModel'),
       gerenteModel= require('../Models/gerenteModelo'),
-      autoridadModel= require('../Models/autoridadMaximaRuta'),
+      autoridadModel= require('../Models/autoridadModel'),
       multer = require('multer'),
       path = require('path'),
       app = express();
 
+const bodyParser = require('body-parser');
 const uuidV4 = require('uuid-v4');
-      const uuid = require('uuid-v4');
+const uuid = require('uuid-v4');
+const storage = multer.diskStorage({
+    destination: path.join('public/uploads/logosEstaciones'),
+    filename: (req, file, cb) => {
+        //console.log(uuid.v4());
+        cb(null, uuidV4() + path.extname(file.originalname));
+    }
+});
 
-      const storage = multer.diskStorage({
-        destination: path.join('public/uploads/logosEstaciones'),
-        filename: (req, file, cb) =>{
-            //console.log(uuid.v4());
-           cb(null, uuidV4() + path.extname(file.originalname));
-        }
-      });
-      //Settings 
-      app.set('Views', path.join(__dirname,'views'));
-      app.set('View engine', 'ejs');
+//Settings 
+app.set('Views', path.join(__dirname,'views'));
+app.set('View engine', 'ejs');
       
-      //Middlewares
-      app.use(multer({storage}).single('myfile'));
-    //POST
-app.post('/create', (req, res) =>{ 
+//Middlewares
+app.use(multer({storage}).single('myfile'));
+
+//POST
+app.post('/create', (req, res) => { 
     let body = req.body;
     let file = req.file;   
     // console.log(bodys, 'este es tu bodys');
     // console.log(body, 'es el body');
-    let newData ={
+    let newData = {
         nombre:body.nombre,
+        correo: body.correo,
         telefono:body.telefono,
-        idAutoridad: body.idAutoridad,
-        idGerente: body.idGerente,
-        idRepresentante: body.idRepresentante,
-        cp: {
-            cp:body.cp,
-            estado:body.estado,
-            asentamiento:body.asentamiento,
-            ciudad:body.ciudad,
-            estado:body.estado,
-            municipio: body.municipio
-        },
         calleNumero: body.calleNumero,
+        estado: body.estado,
+        municipio: body.municipio,
+        codigoP: body.codigoP,
+        
         filename: file.filename,
         path: 'public/uploads/logosEstaciones' + req.file.filename,
         originalname: file.originalname,
         mimetype: file.mimetype,
-        size: file.size 
+        size: file.size
+        
+        // idAutoridad: body.idAutoridad,
+        // idGerente: body.idGerente,
+        // idRepresentante: body.idRepresentante,
+        // cp: {
+        //     cp:body.cp,
+        //     estado:body.estado,
+        //     asentamiento:body.asentamiento,
+        //     ciudad:body.ciudad,
+        //     estado:body.estado,
+        //     municipio: body.municipio
+        // },
     };
 
     console.log(newData,'Esta es tu data');
 
-    estacionModel.create(newData, (err, estacion) =>{
+    estacionModel.create(newData, (err, estacion) => {
         if (err) {
             res.status(400).json({
-                ok:false,
+                ok: false,
                 message:'No se pudo registrar el autor',
                 err,
-            })
+            });
         }
         res.status(200).json({
             estacion
@@ -67,14 +75,14 @@ app.post('/create', (req, res) =>{
     });
 
 });
-    //GET
 
-app.get('/',(req, res) =>{
+// GET
+app.get('/',(req, res) => {
     //res.send('sirvce')
-    estacionModel.find({}, (err, estaciones) =>{
-        representanteModel.populate(estaciones, {path: "idRepresentante"}, (err, estaciones) =>{
+    estacionModel.find({}, (err, estaciones) => {
+        representanteModel.populate(estaciones, {path: "idRepresentante"}, (err, estaciones) => {
             gerenteModel.populate(estaciones, {path:"idGerente"}, (err, estaciones) => {
-                autoridadModel.populate(estaciones, {path:"idAutoridad"}, (err, estaciones) =>{
+                autoridadModel.populate(estaciones, {path:"idAutoridad"}, (err, estaciones) => {
                     res.status(200).send(estaciones); 
                 });
             });
@@ -82,9 +90,9 @@ app.get('/',(req, res) =>{
     });
 });
 
-//GET ID
 
-app.get('/:id', (req, res) =>{
+//GET ID
+app.get('/:id', (req, res) => {
     let id = req.params.id;
 
     estacionModel.findById(id, (err, estaciones) =>{
@@ -108,9 +116,9 @@ app.get('/:id', (req, res) =>{
 //UPDATE
 
 //Delete
-app.delete('/:id', (req, res) =>{
+app.delete('/:id', (req, res) => {
     let id = req.params.id;
-    estacionModel.findByIdAndDelete(id, (err, deleteEstacion) =>{
+    estacionModel.findByIdAndDelete(id, (err, deleteEstacion) => {
         if (err) {
             return res.status(400).json({
                 ok:false,
@@ -128,7 +136,7 @@ app.delete('/:id', (req, res) =>{
         }
         res.status(200).json({
            deleteEstacion
-        })
+        });
     });
 });
 
