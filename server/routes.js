@@ -23,7 +23,8 @@ const usuarios = require('../Routes/usuariosRuta'),
       simulacro5 = require('../Routes/e13Simulacros/simulacro5Route'),
       producto = require('../Routes/productRoute'),
       extintor = require('../Routes/extintoresRoute'),
-      comunicacion = require('../Routes/comunicacionRoute');
+      comunicacion = require('../Routes/comunicacionRoute'),
+      personal = require('../Routes/personalRoute');
       
 app.get('/',(req, res) => {
     res.send('Bienvenido al OMS');
@@ -51,5 +52,6 @@ app.use('/simulacro5', simulacro5);
 app.use('/producto', producto);
 app.use('/extintor', extintor);
 app.use('/comunicacion', comunicacion);
+app.use('/personal', personal);
       
 module.exports = app;

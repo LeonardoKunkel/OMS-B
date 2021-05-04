@@ -24,9 +24,9 @@ app.get('/', (req, res) => {
 app.post('/create', (req, res) => {
     let body = req.body;
     let newPolitica = {
-        // politicaEscogida: body.politicaEscogida
-        name: body.name,
-        desc: body.desc,
+        politicaSelected: body.politicaSelected
+        // name: body.name,
+        // desc: body.desc,
     };
     politicaModel.create(newPolitica, (err, politicaCreated) => {
         if (err) {
@@ -40,6 +40,34 @@ app.post('/create', (req, res) => {
                 ok: true,
                 politicaCreated
             });
+        }
+    });
+});
+
+// Put
+app.put('/:id', (req, res) => {
+    const id = req.params.id;
+    const newPolitica = req.body;
+    
+    politicaModel.findByIdAndUpdate(id, newPolitica, (err, politicaUpdated) => {
+        if(err) {
+            res.status(500).json({
+                ok: false,
+                message: 'Politica no saved',
+                err
+            });
+        } else {
+            if (!politicaUpdated) {
+                res.status(404).json({
+                    ok: false,
+                    message: 'Política not updated'
+                });
+            } else {
+                res.status(200).json({
+                    ok: true,
+                    politicaUpdated
+                });
+            }
         }
     });
 });

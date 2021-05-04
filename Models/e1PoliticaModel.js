@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 
 const politicaSchema = new mongoose.Schema({
-    // politicaEscogida: String
-    name: String,
-    desc: String,
+    politicaSelected: String,
 });
 
 module.exports = mongoose.model('Política', politicaSchema);
