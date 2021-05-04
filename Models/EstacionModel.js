@@ -10,11 +10,11 @@ const estacionSchema = new Schema({
     municipio: { type: String },
     codigoP: { type: Number },
     
-    filename: {type: String},
-    path: {type: String},
-    originalname: {type: String},
-    mimetype: {type: String},
-    size: {type: Number},
+    // filename: {type: String},
+    // path: {type: String},
+    // originalname: {type: String},
+    // mimetype: {type: String},
+    // size: {type: Number},
     
     // idAutoridad: {
     //     type: mongoose.Schema.ObjectId,
